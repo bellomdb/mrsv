@@ -17,45 +17,69 @@ const FEATURED_BRANDS: FeaturedBrand[] = [
   { name: 'Pagani', slug: 'pagani', category: 'Hypercar' },
 ]
 
+const brandsByCategory = {
+  Performance: FEATURED_BRANDS.filter((b) => b.category === 'Performance'),
+  Luxury: FEATURED_BRANDS.filter((b) => b.category === 'Luxury'),
+  Hypercar: FEATURED_BRANDS.filter((b) => b.category === 'Hypercar'),
+}
+
 export function FeaturedBrands() {
   return (
-    <section className="border-t border-border/60 bg-sidebar/50">
-      <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <div className="text-center">
+    <section className="border-t border-border/60 bg-gradient-to-b from-sidebar/30 to-sidebar/10 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mb-20 text-center">
           <p className="text-xs uppercase tracking-[0.35em] text-primary">Represented Brands</p>
-          <h2 className="mt-3 font-serif text-3xl font-semibold md:text-4xl">
+          <h2 className="mt-4 font-serif text-4xl font-semibold text-balance md:text-5xl">
             The World&apos;s Finest Manufacturers
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Mrs Vehicle brings together the most prestigious automotive brands, from legendary performance marques to luxury innovators.
+          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground">
+            Mrs Vehicle celebrates the most prestigious automotive brands—from legendary performance marques and timeless luxury innovators to cutting-edge hypercar engineers.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          {FEATURED_BRANDS.map((brand) => (
-            <div
-              key={brand.slug}
-              className="flex flex-col items-center justify-center gap-3 rounded-lg border border-border/60 bg-card/50 p-6 backdrop-blur-sm transition-all duration-200 hover:border-primary/50 hover:bg-card/80"
-            >
-              <img
-                src={`https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/${brand.slug}/default.svg`}
-                alt={`${brand.name} logo`}
-                className="h-10 w-auto object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
-              <div className="text-center">
-                <p className="text-sm font-medium text-card-foreground">{brand.name}</p>
-                <p className="text-xs text-muted-foreground">{brand.category}</p>
+        <div className="space-y-16">
+          {Object.entries(brandsByCategory).map(([category, brands]) => (
+            <div key={category}>
+              <h3 className="mb-8 text-center font-serif text-2xl font-semibold text-foreground/80">
+                {category}
+              </h3>
+              <div className={`grid gap-8 ${category === 'Hypercar' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+                {brands.map((brand) => (
+                  <div
+                    key={brand.slug}
+                    className="group relative flex flex-col items-center justify-center rounded-xl border border-border/40 bg-card/40 p-10 backdrop-blur-lg transition-all duration-300 hover:border-primary/60 hover:bg-card/60 hover:shadow-lg md:p-12"
+                  >
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative flex h-24 w-full items-center justify-center md:h-28">
+                      <img
+                        src={`https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/${brand.slug}/default.svg`}
+                        alt={`${brand.name} logo`}
+                        className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none'
+                        }}
+                      />
+                    </div>
+                    <div className="relative mt-6 text-center">
+                      <p className="font-serif text-lg font-semibold text-card-foreground transition-colors duration-300 group-hover:text-primary">
+                        {brand.name}
+                      </p>
+                      <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-muted-foreground/70">
+                        {brand.category}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-muted-foreground">
-          Additional manufacturers and emerging brands are welcome to apply for participation. Contact us for more information.
-        </p>
+        <div className="mt-16 text-center">
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Additional manufacturers and emerging brands are welcome to apply for participation at the Mrs Vehicle World Car Show.
+          </p>
+        </div>
       </div>
     </section>
   )
