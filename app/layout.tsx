@@ -1,10 +1,22 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Mrs Vehicle — The World Car Show',
+  description:
+    'Mrs Vehicle (Mrs V) is a prestigious international automobile awards show celebrating excellence in automotive engineering, design, innovation, and performance. Attendance is by invitation only.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -26,11 +38,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#161511',
 }
 
 export default function RootLayout({
@@ -39,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className={`bg-background ${playfair.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
