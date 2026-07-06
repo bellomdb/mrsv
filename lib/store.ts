@@ -39,5 +39,13 @@ export function getLocalNominations(): Nomination[] {
 }
 
 export function saveLocalNomination(nom: Nomination) {
-  write(NOM_KEY, [...getLocalNominations(), nom])
+  const existing = getLocalNominations()
+  const filtered = existing.filter((n) => n.reference !== nom.reference)
+  write(NOM_KEY, [...filtered, nom])
+}
+
+export function findLocalNomination(reference: string): Nomination | undefined {
+  return getLocalNominations().find(
+    (n) => n.reference.toLowerCase() === reference.toLowerCase(),
+  )
 }
