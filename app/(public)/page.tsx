@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Award, Calendar, Crown, MapPin, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AwardCard } from '@/components/award-card'
+import { FeaturedBrands } from '@/components/featured-brands'
 import { AWARDS, EVENT, GUEST_CATEGORIES, SCHEDULE } from '@/lib/data'
 
 export default function HomePage() {
@@ -74,6 +75,9 @@ export default function HomePage() {
           promote innovation, excellence, and global collaboration.
         </p>
       </section>
+
+      {/* Featured Brands */}
+      <FeaturedBrands />
 
       {/* Awards preview */}
       <section className="border-t border-border/60 bg-sidebar/50">
