@@ -8,9 +8,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { GUEST_CATEGORIES, categoryLabel, generateReference } from '@/lib/data'
-import { saveLocalApplication } from '@/lib/store'
-import type { Application, GuestCategory } from '@/lib/types'
+import { GUEST_CATEGORIES, categoryLabel } from '@/lib/data'
+import { submitApplication } from '@/app/actions/applications'
+import type { GuestCategory } from '@/lib/types'
 
 const STEPS = ['Personal Details', 'Guest Category', 'Affiliation', 'Review & Submit']
 
